@@ -15,8 +15,8 @@ ENV="${1}"
 PROFILE="${2:-default}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" ; pwd -P)"
 
-pushd ${SCRIPT_DIR}/../terraform
+pushd ${SCRIPT_DIR}/../terraform/01-vpc
 
-terraform apply -var-file environments/${ENV}.tfvars -var "profile=${PROFILE}"
+terraform apply -var-file ../${ENV}.tfvars -var "profile=${PROFILE}"
 
 popd
