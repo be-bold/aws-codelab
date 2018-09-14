@@ -5,9 +5,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "biz-kommitment-${local.team_name}-terraform-state-${var.account_id}-${var.region}"
-    key    = "${local.basename}-vpc"
-    region = "${var.region}"
+    bucket = "biz-kommitment-team1-terraform-state-eu-central-1"
+    key = "products/vpc.tfstate"
     encrypt = true
+    region = "eu-central-1"
+    profile = "marcel"
   }
 }
