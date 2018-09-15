@@ -9,3 +9,7 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
   value = "${aws_subnet.private.*.id}"
 }
+
+output "alb_arn" {
+  value = "${aws_lb.this.arn}"
+}

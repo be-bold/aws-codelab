@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
   name = "${local.basename}-alb"
-  vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
+  vpc_id = "${aws_vpc.this.id}"
 
   ingress {
     from_port = 443
@@ -29,7 +29,7 @@ resource "aws_lb" "this" {
   name = "${local.basename}-alb"
   internal = false
   load_balancer_type = "application"
-  subnets = ["${data.terraform_remote_state.vpc.public_subnet_ids}"]
+  subnets = ["${aws_subnet.public.*.id}"]
   security_groups = ["${aws_security_group.alb.id}"]
   tags = "${local.default_tags}"
 }

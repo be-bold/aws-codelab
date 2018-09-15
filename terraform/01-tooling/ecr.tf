@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "service1" {
-  name = "${local.vertical}-service1"
+  name = "products-service1"
 }
 
 resource "aws_ecr_lifecycle_policy" "service1" {
