@@ -13,3 +13,7 @@ output "private_subnet_ids" {
 output "alb_arn" {
   value = "${aws_lb.this.arn}"
 }
+
+output "alb_listener_arn" {
+  value = "${aws_lb_listener.this.arn}"
+}

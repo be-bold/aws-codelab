@@ -17,9 +17,12 @@ resource "aws_security_group" "alb" {
   }
 
   egress {
-    from_port = 0 // all
-    to_port = 0 // all
-    protocol = "-1" // all
+    from_port = 0
+    // all
+    to_port = 0
+    // all
+    protocol = "-1"
+    // all
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -32,4 +35,19 @@ resource "aws_lb" "this" {
   subnets = ["${aws_subnet.public.*.id}"]
   security_groups = ["${aws_security_group.alb.id}"]
   tags = "${local.default_tags}"
+}
+
+resource "aws_lb_listener" "this" {
+  load_balancer_arn = "${aws_lb.this.arn}"
+  port = 80
+  protocol = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Default action. No listener rule fits the request."
+      status_code = "200"
+    }
+  }
 }
