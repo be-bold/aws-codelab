@@ -14,3 +14,6 @@ aws-codelab
 - Build image: `docker build -t test .`
 - Tag image: `docker tag test:latest <account-id>.dkr.ecr.eu-central-1.amazonaws.com/test:latest`
 - Push image: `docker push <account-id>.dkr.ecr.eu-central-1.amazonaws.com/test:latest`
+
+# Auto-Scaling
+- load test with `watch -n 1 "curl www.google.de"` or [wrk](https://github.com/wg/wrk)
