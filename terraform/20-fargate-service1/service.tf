@@ -46,7 +46,7 @@ DEFINITION
 resource "aws_ecs_service" "this" {
   name = "${local.service_name}"
   task_definition = "${aws_ecs_task_definition.this.arn}"
-  desired_count = "${local.desired_count}"
+  desired_count = 1
   cluster = "${aws_ecs_cluster.this.id}"
   depends_on = [
     "aws_ecs_task_definition.this",
@@ -70,6 +70,8 @@ resource "aws_ecs_service" "this" {
 
   lifecycle {
     create_before_destroy = true
+    // keep current desired_count (can be changed by autoscaling) when updating resource
+    ignore_changes = ["desired_count"]
   }
 }
 
