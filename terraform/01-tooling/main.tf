@@ -7,5 +7,6 @@ terraform {
     bucket = "biz-kommitment-team1-terraform-state-eu-central-1"
     key = "tooling.tfstate"
     encrypt = true
+    dynamodb_table = "team1-terraform-state-lock"
   }
 }
