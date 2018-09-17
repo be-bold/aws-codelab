@@ -6,13 +6,19 @@ set -e -o pipefail
 
 ###### Inputs ######
 
-SERVICE_VERSION=$1
+ENVIRONMENT=$1
+SERVICE_VERSION=$2
 
 
 ###### Input checks ######
 
+if [[ -z "${ENVIRONMENT}" ]]; then
+    echo "First argument must be the environment (develop, live)"
+    exit 1
+fi
+
 if [[ -z "${SERVICE_VERSION}" ]]; then
-    echo "First argument must be the service version (e.g. latest)"
+    echo "Second argument must be the service version (e.g. latest)"
     exit 1
 fi
 
@@ -33,4 +39,6 @@ fi
 
 ###### Main ######
 
-terraform apply -var-file ../develop.tfvars -var "service_version=$SERVICE_VERSION"
+terraform workspace select "${ENVIRONMENT}"
+
+terraform apply -var-file ../${ENVIRONMENT}.tfvars -var "service_version=$SERVICE_VERSION"

@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "this" {
         }
       ],
       "environment" : [
-          { "name" : "ENV", "value" : "${var.environment}" }
+          { "name" : "ENV", "value" : "${local.environment}" }
       ],
       "logConfiguration": {
         "logDriver": "awslogs",

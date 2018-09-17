@@ -12,6 +12,7 @@ terraform {
 }
 
 data "terraform_remote_state" "vpc" {
+  workspace = "${terraform.workspace}"
   backend = "s3"
   config {
     // uses AWS_PROFILE and AWS_DEFAULT_REGION

@@ -4,7 +4,17 @@
 set -e -o pipefail
 
 
+###### Inputs ######
+
+ENVIRONMENT=$1
+
+
 ###### Input checks ######
+
+if [[ -z "${ENVIRONMENT}" ]]; then
+    echo "First argument must be the environment (develop, live)"
+    exit 1
+fi
 
 if [[ -z "${AWS_REGION}" ]]; then
     echo "ERROR: Environment variable AWS_REGION must be set. (e.g. eu-central-1 for Frankfurt)"
@@ -18,4 +28,6 @@ fi
 
 ###### Main ######
 
-terraform destroy -var-file ../develop.tfvars
+terraform workspace select "${ENVIRONMENT}"
+
+terraform destroy -var-file ../${ENVIRONMENT}.tfvars

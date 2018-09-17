@@ -2,14 +2,15 @@ locals {
 
   team_name = "team1"
   vertical = "products"
+  environment = "${terraform.workspace}"
+  basename = "${local.vertical}-${local.environment}"
   service = "service1"
-  basename = "${local.vertical}-${var.environment}"
   service_name = "${local.basename}-${local.service}"
 
   default_tags = {
     team = "${local.team_name}"
     vertical = "${local.vertical}"
-    environment = "${var.environment}"
+    environment = "${local.environment}"
     service = "${local.service}"
   }
 
