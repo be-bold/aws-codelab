@@ -1,18 +1,18 @@
 resource "aws_appautoscaling_target" "this" {
-  min_capacity       = "${local.min_capacity}"
-  max_capacity       = "${local.max_capacity}"
-  resource_id        = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
-  role_arn           = "${aws_iam_role.autoscaling_role.arn}"
+  min_capacity = "${local.min_capacity}"
+  max_capacity = "${local.max_capacity}"
+  resource_id = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
+  role_arn = "${aws_iam_role.autoscaling_role.arn}"
   scalable_dimension = "ecs:service:DesiredCount"
-  service_namespace  = "ecs"
+  service_namespace = "ecs"
 }
 
 resource "aws_appautoscaling_policy" "this" {
-  name                    = "${local.service_name}"
-  policy_type             = "TargetTrackingScaling"
-  resource_id             = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
-  scalable_dimension      = "ecs:service:DesiredCount"
-  service_namespace       = "ecs"
+  name = "${local.service_name}"
+  policy_type = "TargetTrackingScaling"
+  resource_id = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
+  scalable_dimension = "ecs:service:DesiredCount"
+  service_namespace = "ecs"
 
   target_tracking_scaling_policy_configuration {
     target_value = 10
