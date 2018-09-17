@@ -33,4 +33,4 @@ fi
 
 ###### Main ######
 
-terraform apply -var-file ../develop.tfvars -var "profile=$AWS_PROFILE" -var "service_version=$SERVICE_VERSION"
+terraform apply -var-file ../develop.tfvars -var "service_version=$SERVICE_VERSION"

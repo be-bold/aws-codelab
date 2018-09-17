@@ -1,11 +1,20 @@
 #!/usr/bin/env bash
 
+
 ###### Environment Variable Definitions ######
 
 source env-vars.sh
 
 
+###### Terraform with AWS provider ######
+
+# AWS_PROFILE, AWS_REGION and AWS_DEFAULT_REGION must be set
+export AWS_DEFAULT_REGION=$AWS_REGION
+
+
 ###### Terraform Variable Definitions ######
+
+export TF_VAR_region=$AWS_REGION
 export TF_VAR_aws_account_id=$AWS_ACCOUNT_ID
 
 
