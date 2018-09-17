@@ -42,6 +42,8 @@ resource "aws_lb_listener" "this" {
   port = 80
   protocol = "HTTP"
 
+  // Hint: You can use a redirect as default_action to redirect http traffic to https
+  // This is helpful for endpoints used by endusers (api, website) directly.
   default_action {
     type = "fixed-response"
     fixed_response {
