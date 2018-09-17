@@ -5,6 +5,10 @@
 source env-vars.sh
 
 
+###### Terraform Variable Definitions ######
+export TF_VAR_aws_account_id=$AWS_ACCOUNT_ID
+
+
 ###### Checks ######
 
 echo "Check if environment variables are set"

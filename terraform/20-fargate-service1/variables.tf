@@ -11,7 +11,7 @@ variable "environment" {
   type = "string"
 }
 
-variable "account_id" {
+variable "aws_account_id" {
   type = "string"
 }
 
