@@ -4,7 +4,7 @@
 
 
 resource "aws_s3_bucket" "this" {
-  bucket = "biz-kommitment-team1-terraform-state-eu-central-1"
+  bucket = "biz-kommitment-${local.basename}-terraform-state-${var.region}"
   versioning {
     enabled = true
   }
@@ -28,5 +28,5 @@ resource "aws_kms_key" "this" {
 
 resource "aws_kms_alias" "this" {
   target_key_id = "${aws_kms_key.this.id}"
-  name = "alias/${local.team_name}-terraform-state-bucket-key"
+  name = "alias/${local.basename}-terraform-state-bucket-key"
 }
