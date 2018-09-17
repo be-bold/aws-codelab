@@ -3,7 +3,7 @@ locals {
   team_name = "team1"
   vertical = "products"
   environment = "${terraform.workspace}"
-  basename = "${local.vertical}-${local.environment}"
+  basename = "${local.team_name}-${local.vertical}-${local.environment}"
 
   default_tags = {
     team = "${local.team_name}"
