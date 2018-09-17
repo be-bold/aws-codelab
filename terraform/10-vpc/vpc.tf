@@ -64,7 +64,8 @@ resource "aws_eip" "nat_gateway" {
   vpc = true
   tags = "${merge(local.default_tags, map("Name","${local.basename}-nat-eip-${count.index + 1}"))}"
   lifecycle {
-    prevent_destroy = true
+    // should be used to keep IPs, but we want to delete them in the CodeLab
+    // prevent_destroy = true
   }
 }
 
