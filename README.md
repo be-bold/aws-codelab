@@ -1,6 +1,10 @@
 aws-codelab
 ---
 
+# Requirements
+- Terraform >= v0.11.8
+- Git
+
 # Start developing
 - copy env-vars.sh.template to env-vars.sh and define variables: `cp env-vars.sh.template env-vars.sh`
 - env-vars.sh is not checked-in
