@@ -22,8 +22,8 @@ resource "aws_security_group" "alb" {
     to_port = 0
     // all
     protocol = "-1"
-    // all
-    cidr_blocks = ["0.0.0.0/0"]
+    // always routes into private subnets
+    cidr_blocks = ["${local.private_subnets_cidr}"]
   }
 
 }
