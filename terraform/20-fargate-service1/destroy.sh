@@ -4,7 +4,22 @@
 set -e -o pipefail
 
 
+###### Inputs ######
+
+SERVICE_VERSION=$1
+
+
 ###### Input checks ######
+
+if [[ -z "${SERVICE_VERSION}" ]]; then
+    echo "First argument must be the service version (e.g. latest)"
+    exit 1
+fi
+
+if [[ -z "${AWS_ACCOUNT_ID}" ]]; then
+    echo "ERROR: Environment variable AWS_ACCOUNT_ID must be set."
+    exit 1
+fi
 
 if [[ -z "${AWS_REGION}" ]]; then
     echo "ERROR: Environment variable AWS_REGION must be set. (e.g. eu-central-1 for Frankfurt)"
@@ -18,8 +33,4 @@ fi
 
 ###### Main ######
 
-# ATTENTION: Initially you must comment the backend definition in main.tf. Follow instructions there.
-
-terraform init
-# Hint: Backend config can be defined via -backend-config to avoid repetition
-# see https://www.terraform.io/docs/backends/config.html#partial-configuration
+terraform destroy -var-file ../develop.tfvars -var "service_version=$SERVICE_VERSION"

@@ -18,8 +18,4 @@ fi
 
 ###### Main ######
 
-# ATTENTION: Initially you must comment the backend definition in main.tf. Follow instructions there.
-
-terraform init
-# Hint: Backend config can be defined via -backend-config to avoid repetition
-# see https://www.terraform.io/docs/backends/config.html#partial-configuration
+terraform apply
