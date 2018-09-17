@@ -2,9 +2,11 @@ resource "aws_appautoscaling_target" "this" {
   min_capacity = "${local.min_capacity}"
   max_capacity = "${local.max_capacity}"
   resource_id = "service/${aws_ecs_cluster.this.name}/${aws_ecs_service.this.name}"
-  role_arn = "${aws_iam_role.autoscaling_role.arn}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace = "ecs"
+  // role_arn not necessary as AWS creates and uses a service-linked role in your account:
+  // AWSServiceRoleForApplicationAutoScaling_ECSService
+  // See https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html
 }
 
 resource "aws_appautoscaling_policy" "this" {
