@@ -7,7 +7,7 @@ resource "aws_ecs_task_definition" "this" {
   [
     {
       "name": "${local.service_name}",
-      "image": "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${local.docker_image}",
+      "image": "${var.account_id}.dkr.ecr.${var.region}.amazonaws.com/${local.docker_image}:${var.service_version}",
       "taskRoleArn": "${aws_iam_role.task_role.arn}",
       "executionRoleArn": "${aws_iam_role.execution_role.arn}",
       "cpu": ${local.cpu},
@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "this" {
         "options": {
           "awslogs-group": "${local.service_name}",
           "awslogs-region": "${var.region}",
-          "awslogs-stream-prefix": "latest"
+          "awslogs-stream-prefix": "${var.service_version}"
         }
       }
     }
