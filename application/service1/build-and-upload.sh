@@ -34,7 +34,7 @@ fi
 ###### Main ######
 
 echo "Build docker image"
-docker build -t team1/products-service1:${SERVICE_VERSION} .
+docker build -t team1/products-service1:${SERVICE_VERSION} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
 
 echo "Login to ECR (your Docker Registry)"
 $(aws ecr get-login --no-include-email)
