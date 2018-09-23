@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "this" {
       "name": "${local.service_name}",
       "image": "${var.aws_account_id}.dkr.ecr.${var.region}.amazonaws.com/${local.docker_image}:${var.service_version}",
       "taskRoleArn": "${aws_iam_role.task_role.arn}",
-      "executionRoleArn": "${aws_iam_role.execution_role.arn}",
+      "executionRoleArn": "${aws_iam_role.task_execution_role.arn}",
       "cpu": ${local.cpu},
       "memory": ${local.memory},
       "essential": true,
@@ -36,7 +36,7 @@ DEFINITION
 
   family = "${local.service_name}"
   task_role_arn = "${aws_iam_role.task_role.arn}"
-  execution_role_arn = "${aws_iam_role.execution_role.arn}"
+  execution_role_arn = "${aws_iam_role.task_execution_role.arn}"
   network_mode = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu = "${local.cpu}"
