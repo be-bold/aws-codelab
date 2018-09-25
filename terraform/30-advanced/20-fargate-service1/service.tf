@@ -8,10 +8,6 @@ resource "aws_ecs_task_definition" "this" {
     {
       "name": "${local.service_name}",
       "image": "${local.aws_account_id}.dkr.ecr.${local.region}.amazonaws.com/${local.docker_image}:${local.service_version}",
-      "taskRoleArn": "${aws_iam_role.task_role.arn}",
-      "executionRoleArn": "${aws_iam_role.task_execution_role.arn}",
-      "cpu": ${local.cpu},
-      "memory": ${local.memory},
       "essential": true,
       "portMappings": [
         {
@@ -19,13 +15,10 @@ resource "aws_ecs_task_definition" "this" {
           "hostPort": 80
         }
       ],
-      "environment" : [
-          { "name" : "ENV", "value" : "${local.environment}" }
-      ],
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "${local.service_name}",
+          "awslogs-group": "${aws_cloudwatch_log_group.this.name}",
           "awslogs-region": "${local.region}",
           "awslogs-stream-prefix": "${local.service_version}"
         }
@@ -39,8 +32,8 @@ DEFINITION
   execution_role_arn = "${aws_iam_role.task_execution_role.arn}"
   network_mode = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu = "${local.cpu}"
-  memory = "${local.memory}"
+  cpu = 256 # 0.25 vCPU
+  memory = 512 # MB
 }
 
 resource "aws_ecs_service" "this" {
