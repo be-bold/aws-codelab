@@ -4,7 +4,7 @@
 
 
 resource "aws_s3_bucket" "this" {
-  bucket = "biz-kommitment-beginner-${local.basename}-terraform-state-${local.region}"
+  bucket = "biz-kommitment-advanced-${local.basename}-terraform-state-${local.region}"
   versioning {
     enabled = true
   }
