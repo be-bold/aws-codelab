@@ -42,13 +42,6 @@ resource "aws_security_group" "this" {
   vpc_id = "${data.terraform_remote_state.vpc.vpc_id}"
 
   ingress {
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
-    security_groups = ["${data.terraform_remote_state.vpc.alb_security_group_id}"]
-  }
-
-  ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
