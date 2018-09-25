@@ -23,6 +23,7 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_kms_key" "this" {
+  description = "terraform-state-bucket-kms-key"
   tags = "${merge(local.default_tags, map("Name", "terraform-state-bucket-kms-key"))}"
 }
 
