@@ -11,6 +11,5 @@ terraform {
     bucket = "biz-kommitment-advanced-team1-terraform-state-eu-central-1"
     key = "products/vpc.tfstate"
     encrypt = true
-    dynamodb_table = "team1-terraform-state-lock"
   }
 }
