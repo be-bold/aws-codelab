@@ -3,13 +3,6 @@ resource "aws_security_group" "alb" {
   vpc_id = "${aws_vpc.this.id}"
 
   ingress {
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
     from_port = 80
     to_port = 80
     protocol = "tcp"
@@ -22,8 +15,8 @@ resource "aws_security_group" "alb" {
     to_port = 0
     // all
     protocol = "-1"
-    // always routes into private subnets
-    cidr_blocks = ["${local.private_subnets_cidr}"]
+    // always routes inside vpc
+    cidr_blocks = ["172.16.0.0/16"]
   }
 
 }
@@ -32,7 +25,7 @@ resource "aws_lb" "this" {
   name = "${local.basename}-alb"
   internal = false
   load_balancer_type = "application"
-  subnets = ["${aws_subnet.public.*.id}"]
+  subnets = ["${aws_subnet.public_1a.id}", "${aws_subnet.public_1b.id}", "${aws_subnet.public_1c.id}"]
   security_groups = ["${aws_security_group.alb.id}"]
   tags = "${local.default_tags}"
 }
