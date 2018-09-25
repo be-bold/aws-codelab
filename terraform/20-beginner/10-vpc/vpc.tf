@@ -18,7 +18,7 @@ resource "aws_subnet" "public_1a" {
   cidr_block = "172.16.0.0/21"
   vpc_id = "${aws_vpc.this.id}"
   map_public_ip_on_launch = true
-  availability_zone = "eu-central-1a"
+  availability_zone = "${local.region}a"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-public-1a"))}"
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "public_1b" {
   cidr_block = "172.16.8.0/21"
   vpc_id = "${aws_vpc.this.id}"
   map_public_ip_on_launch = true
-  availability_zone = "eu-central-1b"
+  availability_zone = "${local.region}b"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-public-1b"))}"
 }
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "public_1c" {
   cidr_block = "172.16.16.0/21"
   vpc_id = "${aws_vpc.this.id}"
   map_public_ip_on_launch = true
-  availability_zone = "eu-central-1c"
+  availability_zone = "${local.region}c"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-public-1c"))}"
 }
 
@@ -70,21 +70,21 @@ resource "aws_route_table_association" "public_1c" {
 resource "aws_subnet" "private_1a" {
   cidr_block = "172.16.24.0/21"
   vpc_id = "${aws_vpc.this.id}"
-  availability_zone = "eu-central-1a"
+  availability_zone = "${local.region}a"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-private-1a"))}"
 }
 
 resource "aws_subnet" "private_1b" {
   cidr_block = "172.16.32.0/21"
   vpc_id = "${aws_vpc.this.id}"
-  availability_zone = "eu-central-1b"
+  availability_zone = "${local.region}b"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-private-1b"))}"
 }
 
 resource "aws_subnet" "private_1c" {
   cidr_block = "172.16.40.0/21"
   vpc_id = "${aws_vpc.this.id}"
-  availability_zone = "eu-central-1c"
+  availability_zone = "${local.region}c"
   tags = "${merge(local.default_tags, map("Name", "${local.basename}-subnet-private-1c"))}"
 }
 
