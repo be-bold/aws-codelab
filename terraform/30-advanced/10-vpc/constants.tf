@@ -1,6 +1,6 @@
 locals {
 
-  region = "eu-west-1"
+  region = "eu-central-1"
   team_name = "team1"
   vertical = "products"
   environment = "develop"
