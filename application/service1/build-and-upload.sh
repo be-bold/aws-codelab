@@ -37,7 +37,7 @@ echo "Build docker image"
 docker build -t team1/products-service1:${SERVICE_VERSION} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
 
 echo "Login to ECR (your Docker Registry)"
-$(aws ecr get-login --no-include-email)
+$(aws ecr get-login --no-include-email --profile ${AWS_PROFILE})
 
 echo "Tag and push image"
 docker tag team1/products-service1:${SERVICE_VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/team1/products-service1:${SERVICE_VERSION}
