@@ -19,7 +19,5 @@ locals {
 
   service_version = "latest"
   docker_image = "${local.team_name}/${local.vertical}-${local.service}"
-  cpu = 256 # 0.25 vCPU
-  memory = 512 # MB
 
 }

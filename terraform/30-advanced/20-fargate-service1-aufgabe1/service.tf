@@ -32,33 +32,22 @@ DEFINITION
   execution_role_arn = "${aws_iam_role.task_execution_role.arn}"
   network_mode = "awsvpc"
   requires_compatibilities = ["FARGATE"]
+  // choose from a valid cpu / ram combination:
+  // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
   cpu = 256 # 0.25 vCPU
   memory = 512 # MB
 }
 
 resource "aws_ecs_service" "this" {
   name = "${local.service_name}"
+  cluster = "${aws_ecs_cluster.this.id}"
   task_definition = "${aws_ecs_task_definition.this.arn}"
   desired_count = 1
-  cluster = "${aws_ecs_cluster.this.id}"
-  depends_on = [
-    "aws_ecs_task_definition.this",
-    "aws_lb_listener_rule.this"
-  ]
+
   launch_type = "FARGATE"
-  health_check_grace_period_seconds = 300
-  deployment_maximum_percent = 200
-  deployment_minimum_healthy_percent = 100
 
   network_configuration {
     subnets = ["${data.terraform_remote_state.vpc.private_subnet_ids}"]
-    security_groups = ["${aws_security_group.this.id}"]
-  }
-
-  load_balancer {
-    target_group_arn = "${aws_lb_target_group.this.arn}"
-    container_name = "${local.service_name}"
-    container_port = 80
   }
 
   lifecycle {
