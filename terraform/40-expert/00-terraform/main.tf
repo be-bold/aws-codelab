@@ -1,5 +1,7 @@
 // uses AWS_PROFILE and AWS_REGION
-provider "aws" {}
+provider "aws" {
+  version = "1.37"
+}
 
 // Initially you must comment this section to setup terraform state bucket and locking.
 // After creation uncomment and run 'init.sh' while accepting that terraform will copy the state to the backend.

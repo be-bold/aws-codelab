@@ -1,5 +1,7 @@
 // uses AWS_PROFILE and AWS_REGION
-provider "aws" {}
+provider "aws" {
+  version = "1.37"
+}
 
 terraform {
   backend "s3" {
