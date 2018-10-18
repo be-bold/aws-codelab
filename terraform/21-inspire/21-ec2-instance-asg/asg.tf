@@ -28,7 +28,9 @@ resource "aws_launch_template" "web_server" {
 }
 
 resource "aws_autoscaling_group" "web_server" {
-  name = "${local.basename}-web-server"
+  // Use the latest_version of the launch template to force creation of a new autoscaling-group
+  // and therefore a blue-green deployment.
+  name = "${local.basename}-web-server-${aws_launch_template.web_server.latest_version}"
   vpc_zone_identifier = ["${data.aws_subnet_ids.public.ids}"]
   min_size = 1
   max_size = 1
@@ -37,6 +39,11 @@ resource "aws_autoscaling_group" "web_server" {
   launch_template {
     id = "${aws_launch_template.web_server.id}"
     version = "${aws_launch_template.web_server.latest_version}"
+  }
+
+  // Create new autoscaling group before destroying old one to do a blue-green deployment.
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
