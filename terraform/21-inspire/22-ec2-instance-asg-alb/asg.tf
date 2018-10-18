@@ -33,8 +33,8 @@ resource "aws_autoscaling_group" "web_server" {
   name = "${local.basename}-web-server-${aws_launch_template.web_server.latest_version}"
   vpc_zone_identifier = ["${data.aws_subnet_ids.public.ids}"]
   // new in this task: use 2 instances to see load balancing in action
-  min_size = 2
-  max_size = 2
+  min_size = 1
+  max_size = 3
   desired_capacity = 2
 
   launch_template {
@@ -45,6 +45,7 @@ resource "aws_autoscaling_group" "web_server" {
   // Create new autoscaling group before destroying old one to do a blue-green deployment.
   lifecycle {
     create_before_destroy = true
+    ignore_changes = ["desired_capacity"]
   }
 
   // new in this task:
@@ -54,6 +55,13 @@ resource "aws_autoscaling_group" "web_server" {
   // new in this task:
   // registers new instances in the target group hence in the load balancer
   target_group_arns = ["${aws_lb_target_group.web_server.arn}"]
+
+  // needed to load this ASG via data source for auto-scaling
+  tag {
+    key = "Name"
+    value = "${local.basename}-web-server"
+    propagate_at_launch = false
+  }
 }
 
 resource "aws_security_group" "web_server" {
