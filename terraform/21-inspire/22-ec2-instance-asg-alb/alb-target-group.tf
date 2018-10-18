@@ -14,6 +14,11 @@ resource "aws_lb_target_group" "web_server" {
     protocol = "HTTP"
   }
 
+  // https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay
+  // Waiting period until old instances (e.g. during deployment) are removed from target group.
+  // Time to finish open requests. This prolongs the destroy process of the old autoscaling-group.
+  deregistration_delay = 10 // seconds
+
   lifecycle {
     create_before_destroy = true
   }

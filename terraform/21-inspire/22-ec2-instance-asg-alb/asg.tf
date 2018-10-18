@@ -28,7 +28,9 @@ resource "aws_launch_template" "web_server" {
 }
 
 resource "aws_autoscaling_group" "web_server" {
-  name = "${local.basename}-web-server"
+  // Use the latest_version of the launch template to force creation of a new autoscaling-group
+  // and therefore a blue-green deployment.
+  name = "${local.basename}-web-server-${aws_launch_template.web_server.latest_version}"
   vpc_zone_identifier = ["${data.aws_subnet_ids.public.ids}"]
   // new in this task: use 2 instances to see load balancing in action
   min_size = 2
@@ -39,6 +41,15 @@ resource "aws_autoscaling_group" "web_server" {
     id = "${aws_launch_template.web_server.id}"
     version = "${aws_launch_template.web_server.latest_version}"
   }
+
+  // Create new autoscaling group before destroying old one to do a blue-green deployment.
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  // new in this task:
+  // wait for this number of instances during deployment (new autoscaling group)
+  min_elb_capacity = 2
 
   // new in this task:
   // registers new instances in the target group hence in the load balancer
