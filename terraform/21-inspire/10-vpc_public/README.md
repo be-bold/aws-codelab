@@ -2,7 +2,7 @@
 
 
 ## Task
-0. Create a new folder 10-vpc
+0. Create a new folder `vpc`
 0. Create a VPC 
     0. with vpc cidr block 172.16.0.0/16
     0. with three subnets: one per availability zone with cidr blocks
