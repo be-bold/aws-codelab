@@ -16,6 +16,11 @@ Run multiple instances and load balance application to avoid down times during f
     0. define a health check on `/service1/health` (as defined in nginx config)
 0. Create a ALB listener rule in the file `alb-target-group.tf`
     0. if request path matches `/service1/*` forward traffic to the target group
+0. Make change to *aws_autoscaling_group*
+    0. Connect to target group via attribute *target_group_arns*
+    0. Set min_size = 1, max_size = 3, desired_capacity = 2 to allow load balancing between instances
+    0. Set min_elb_capacity = 2 to wait for this number of instances during deployment
+    
     
 
 ## Helpful
