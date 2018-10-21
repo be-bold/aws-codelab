@@ -10,7 +10,8 @@
 
 ## Hints
 <details><summary>Show</summary><p>
-**test**
+
 0. You need 10 resources
 0. Resources: aws_vpc, aws_internet_gateway, aws_subnet, aws_route_table, aws_route, aws_route_table_association
+
 </p></details>
