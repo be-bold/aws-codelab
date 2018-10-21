@@ -9,9 +9,13 @@
 0. Use tags (team, vertical, environment) with all resources where possible
 
 ## Hints
-<details><summary>Show</summary><p>
+<details><summary>Show Hint 1</summary><p>
 
-0. You need 10 resources
-0. Resources: aws_vpc, aws_internet_gateway, aws_subnet, aws_route_table, aws_route, aws_route_table_association
+You need 10 resources
+</p></details>
 
+
+<details><summary>Show Hint 2</summary><p>
+
+Resources: aws_vpc, aws_internet_gateway, aws_subnet, aws_route_table, aws_route, aws_route_table_association
 </p></details>
