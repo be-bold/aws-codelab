@@ -8,8 +8,11 @@
     0. with connection from/to the internet (Internet Gateway)
 0. Use tags (team, vertical, environment) with all resources where possible
 
+##Hints
 <details>
-    <summary>##Hints</summary>
-    0. You need 10 resources
-    0. Resources: aws_vpc, aws_internet_gateway, aws_subnet, aws_route_table, aws_route, aws_route_table_association
+<summary>Show</summary>
+<p>
+0. You need 10 resources
+0. Resources: aws_vpc, aws_internet_gateway, aws_subnet, aws_route_table, aws_route, aws_route_table_association
+</p>
 </details>
