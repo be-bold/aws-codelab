@@ -55,3 +55,8 @@ AWS CodeLab
 ## Git
 - Optionally [install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you want to clone this code examples
 - run in your workspace folder: `git clone git@github.com:marcelboettcher/aws-codelab.git`
+
+
+## IDE (Integrated Development Environment)
+- you can use any IDE or even a text editor
+- but [IntelliJ IDEA](https://www.jetbrains.com/idea/) has syntax highlighting and auto-completion for terraform
