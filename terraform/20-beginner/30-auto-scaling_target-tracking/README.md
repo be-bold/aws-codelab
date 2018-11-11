@@ -26,6 +26,6 @@ You need three data sources and one resource.
 
 <details><summary>Show Hint 2</summary><p>
 
-Data Sources: aws_autoscaling_groups, aws_lb, aws_lb_target_group
+Data Sources: aws_autoscaling_groups, aws_lb, aws_lb_target_group</br>
 Resources: aws_autoscaling_policy
 </p></details>

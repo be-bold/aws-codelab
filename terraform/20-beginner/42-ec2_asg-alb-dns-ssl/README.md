@@ -25,7 +25,7 @@ You need one new resource and two new data soruces.
 
 <details><summary>Show Hint 2</summary><p>
 
-Data Sources: aws_route53_zone, aws_acm_certificate
+Data Sources: aws_route53_zone, aws_acm_certificate</br>
 Resources: aws_route53_record
 </p></details>
 

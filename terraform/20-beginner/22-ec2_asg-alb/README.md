@@ -30,14 +30,14 @@ Run multiple instances and load balance application to avoid down times during f
 ## Hints
 <details><summary>Show Hint 1</summary><p>
 
-ALB: You need three resources.
+ALB: You need three resources.</br>
 ALB Target Group: You need two resources. 
 </p></details>
 
 
 <details><summary>Show Hint 2</summary><p>
 
-ALB: aws_security_group, aws_lb, aws_lb_listener
+ALB: aws_security_group, aws_lb, aws_lb_listener</br>
 ALB Target Group: aws_lb_target_group, aws_lb_listener_rule
 </p></details>
 
