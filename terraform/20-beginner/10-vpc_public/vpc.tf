@@ -1,7 +1,5 @@
 resource "aws_vpc" "this" {
   cidr_block = "172.16.0.0/16"
-  enable_dns_support = true
-  enable_dns_hostnames = true
 
   tags = {
     Name = "team1-vpc"
@@ -24,6 +22,7 @@ resource "aws_internet_gateway" "this" {
 resource "aws_subnet" "public_1a" {
   cidr_block = "172.16.0.0/21"
   vpc_id = "${aws_vpc.this.id}"
+  # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1a"
 
@@ -36,6 +35,7 @@ resource "aws_subnet" "public_1a" {
 resource "aws_subnet" "public_1b" {
   cidr_block = "172.16.8.0/21"
   vpc_id = "${aws_vpc.this.id}"
+  # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1b"
 
@@ -48,6 +48,7 @@ resource "aws_subnet" "public_1b" {
 resource "aws_subnet" "public_1c" {
   cidr_block = "172.16.16.0/21"
   vpc_id = "${aws_vpc.this.id}"
+  # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1c"
 

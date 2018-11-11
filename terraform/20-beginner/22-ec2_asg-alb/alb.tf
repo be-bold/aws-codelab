@@ -1,5 +1,5 @@
 resource "aws_security_group" "alb" {
-  name = "${local.basename}-alb"
+  name = "team1-alb"
   vpc_id = "${data.aws_vpc.this.id}"
 
   ingress {
@@ -10,8 +10,8 @@ resource "aws_security_group" "alb" {
   }
 
   egress {
-    from_port = 0
     // all
+    from_port = 0
     to_port = 0
     // all
     protocol = "-1"
@@ -21,12 +21,14 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_lb" "this" {
-  name = "${local.basename}-alb"
+  name = "team1-alb"
   internal = false
   load_balancer_type = "application"
   subnets = ["${data.aws_subnet_ids.public.ids}"]
   security_groups = ["${aws_security_group.alb.id}"]
-  tags = "${local.default_tags}"
+  tags = {
+    team = "team1"
+  }
 }
 
 resource "aws_lb_listener" "this" {

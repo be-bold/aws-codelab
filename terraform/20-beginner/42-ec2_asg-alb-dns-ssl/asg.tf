@@ -12,7 +12,7 @@ data "aws_ami" "amazon_linux" {
 // launch templates are the new generation of launch configurations
 // https://aws.amazon.com/about-aws/whats-new/2017/11/introducing-launch-templates-for-amazon-ec2-instances/
 resource "aws_launch_template" "web_server" {
-  name = "${local.basename}-web-server"
+  name = "team1-web-server"
   image_id = "${data.aws_ami.amazon_linux.id}"
   instance_type = "t2.micro"
   vpc_security_group_ids = ["${aws_security_group.web_server.id}"]
@@ -22,7 +22,7 @@ resource "aws_launch_template" "web_server" {
   tag_specifications {
     resource_type = "instance"
     tags {
-      Name = "${local.basename}-web-server"
+      Name = "team1-web-server"
     }
   }
 }
@@ -30,7 +30,7 @@ resource "aws_launch_template" "web_server" {
 resource "aws_autoscaling_group" "web_server" {
   // Use the latest_version of the launch template to force creation of a new autoscaling-group
   // and therefore a blue-green deployment.
-  name = "${local.basename}-web-server-${aws_launch_template.web_server.latest_version}"
+  name = "team1-web-server-${aws_launch_template.web_server.latest_version}"
   vpc_zone_identifier = ["${data.aws_subnet_ids.public.ids}"]
   min_size = 1
   max_size = 3
@@ -54,13 +54,13 @@ resource "aws_autoscaling_group" "web_server" {
   // needed to load this ASG via data source for auto-scaling
   tag {
     key = "Name"
-    value = "${local.basename}-web-server"
+    value = "team1-web-server"
     propagate_at_launch = false
   }
 }
 
 resource "aws_security_group" "web_server" {
-  name = "${local.basename}-web-server"
+  name = "team1-web-server"
   vpc_id = "${data.aws_vpc.this.id}"
 
   ingress {

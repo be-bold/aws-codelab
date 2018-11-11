@@ -2,7 +2,9 @@
 resource "aws_acm_certificate" "this" {
   domain_name = "team1.codelab.marcelboettcher.de"
   validation_method = "DNS"
-  tags = "${local.default_tags}"
+  tags = {
+    team = "team1"
+  }
 
   lifecycle {
     create_before_destroy = true

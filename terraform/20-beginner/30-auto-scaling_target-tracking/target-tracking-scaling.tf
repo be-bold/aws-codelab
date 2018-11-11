@@ -4,7 +4,7 @@
 // This does not work during a deployment as two autoscaling groups exist.
 
 resource "aws_autoscaling_policy" "this" {
-  name = "${local.basename}-target-tracking-scaling"
+  name = "team1-target-tracking-scaling"
   autoscaling_group_name = "${data.aws_autoscaling_groups.web_server.names[0]}"
 
   policy_type = "TargetTrackingScaling"

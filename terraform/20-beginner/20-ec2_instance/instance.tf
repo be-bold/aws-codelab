@@ -19,12 +19,12 @@ resource "aws_instance" "web_server" {
   associate_public_ip_address = true
 
   tags {
-    Name = "${local.basename}-web-server"
+    Name = "team1-web-server"
   }
 }
 
 resource "aws_security_group" "web_server" {
-  name = "${local.basename}-web-server"
+  name = "team1-web-server"
   vpc_id = "${data.aws_vpc.this.id}"
 
   ingress {
@@ -39,6 +39,7 @@ resource "aws_security_group" "web_server" {
   egress {
     from_port = 0
     to_port = 0
+    # all
     protocol = "-1"
     // to everywhere (in vpc and internet)
     cidr_blocks = ["0.0.0.0/0"]

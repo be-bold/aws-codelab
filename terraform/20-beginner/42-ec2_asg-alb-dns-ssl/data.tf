@@ -1,8 +1,6 @@
 data "aws_vpc" "this" {
   tags {
-    team = "${local.team_name}"
-    vertical = "${local.vertical}"
-    environment = "${local.environment}"
+    team = "team1"
   }
 }
 
