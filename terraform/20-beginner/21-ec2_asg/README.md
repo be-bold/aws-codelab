@@ -30,7 +30,7 @@ Resources: aws_launch_template, aws_autoscaling_group, aws_security_group
 
 <details><summary>Show Hint 3</summary><p>
 
-[user-data.sh](See nginx configuration)
+[See nginx configuration](user-data.sh)
 </p></details>
 
 
