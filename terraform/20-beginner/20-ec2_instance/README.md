@@ -2,7 +2,7 @@
 
 
 ## Task
-0. Create a new folder `ec2`
+0. Create a new folder `10-ec2`
 0. Create an ec2 instance 
     0. based on operating system [Amazon Linux 2 (AMI hvm x86_64 gp2)](https://aws.amazon.com/amazon-linux-2/release-notes/#Amazon_Linux_2_AMI_IDs)
     0. with small instance type (e.g. t2.nano, t2.micro, t2.small)

@@ -5,7 +5,7 @@ If we measure high load on our service (e.g. cpu, memory, requests, ...), we wan
 
 
 ## Task
-0. Create a new folder `auto-scaling`
+0. Create a new folder `30-auto-scaling`
 0. Create an autoscaling policy
     0. using scaling type *target tracking*
     0. predefined metric *ALBRequestCountPerTarget*
