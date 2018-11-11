@@ -4,8 +4,8 @@
 ## Task
 0. Create a new folder `10-ec2`
 0. Create an ec2 instance 
-    0. based on operating system [Amazon Linux 2 (AMI hvm x86_64 gp2)](https://aws.amazon.com/amazon-linux-2/release-notes/#Amazon_Linux_2_AMI_IDs)
-    0. with small instance type (e.g. t2.nano, t2.micro, t2.small)
+    - based on operating system [Amazon Linux 2 (AMI hvm x86_64 gp2)](https://aws.amazon.com/amazon-linux-2/release-notes/#Amazon_Linux_2_AMI_IDs)
+    - with small instance type (e.g. t2.nano, t2.micro, t2.small)
 0. Install nginx on start via `sudo amazon-linux-extras install nginx1.12`
 0. Allow access from the internet (0.0.0.0/0) on port 80
 0. Open the public ip in the browser

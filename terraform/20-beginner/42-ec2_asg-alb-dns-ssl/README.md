@@ -7,12 +7,12 @@ Service can be reached securely via own domain: https://teamX.codelab.marcelboet
 ## Task
 0. Build on task *ec2_asg-alb*
 0. Create a new file `dns.tf`
-    0. Create an A record for teamX.codelab.marcelboettcher.de, which links via [Route53 alias](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html) (AWS concept, not DNS) to the load balancer
+    - Create an A record for teamX.codelab.marcelboettcher.de, which links via [Route53 alias](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html) (AWS concept, not DNS) to the load balancer
 0. Adjust the security group of the load balancer to accept traffic on port 443 instead of 80
 0. Adjust the load balancer listener to
-    0. listen on port 443 (HTTPS) instead of 80 (HTTP)
-    0. link the certificate your created via Amazon Certificate Manager (ACM) in the previous task
-    0. use the recommended [AWS SSL policy](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html) `ELBSecurityPolicy-2016-08`
+    - listen on port 443 (HTTPS) instead of 80 (HTTP)
+    - link the certificate your created via Amazon Certificate Manager (ACM) in the previous task
+    - use the recommended [AWS SSL policy](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html) `ELBSecurityPolicy-2016-08`
 
 
 

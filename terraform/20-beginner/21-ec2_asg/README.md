@@ -9,9 +9,9 @@ Make application resilient: Start a new instance, if the current one fails.
 0. Use auto-scaling group instead of instance to start a single instance
 0. Test what happens when you terminate the instance in the web console
 0. Deployment
-    0. Change something in the user data and apply the changes. What happens?
-    0. Enable instant deployment by adding `${aws_launch_template.web_server.latest_version}` to the name of the *aws_autoscaling_group*
-    0. Avoid downtime by adding `lifecycle { create_before_destroy = true }` to the *aws_autoscaling_group*
+    - Change something in the user data and apply the changes. What happens?
+    - Enable instant deployment by adding `${aws_launch_template.web_server.latest_version}` to the name of the *aws_autoscaling_group*
+    - Avoid downtime by adding `lifecycle { create_before_destroy = true }` to the *aws_autoscaling_group*
 0. Configure nginx to serve requests to /service1/health with http status code 200
 
 

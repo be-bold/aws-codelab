@@ -7,19 +7,19 @@ Run multiple instances and load balance application to avoid down times during f
 ## Task
 0. Build on task *ec2_asg*
 0. Create an application load balancer (ALB) in new file `alb.tf`
-    0. which listens on http port 80 
-    0. allows traffic on port 80 from the internet (0.0.0.0/0)
-    0. use a *default_action* of type *fixed-response* to return some text
-    0. open the ALB endpoint (see web console) in the browser to see your fixed-response
+    - which listens on http port 80 
+    - allows traffic on port 80 from the internet (0.0.0.0/0)
+    - use a *default_action* of type *fixed-response* to return some text
+    - open the ALB endpoint (see web console) in the browser to see your fixed-response
 0. Create a target group in new file `alb-target-group.tf`
-    0. use http port 80 to map load balancer traffic to your instance
-    0. define a health check on `/service1/health` (as defined in nginx config)
+    - use http port 80 to map load balancer traffic to your instance
+    - define a health check on `/service1/health` (as defined in nginx config)
 0. Create a ALB listener rule in the file `alb-target-group.tf`
-    0. if request path matches `/service1/*` forward traffic to the target group
+    - if request path matches `/service1/*` forward traffic to the target group
 0. Make change to *aws_autoscaling_group*
-    0. Connect to target group via attribute *target_group_arns*
-    0. Set min_size = 1, max_size = 3, desired_capacity = 2 to allow load balancing between instances
-    0. Set min_elb_capacity = 2 to wait for this number of instances during deployment
+    - Connect to target group via attribute *target_group_arns*
+    - Set min_size = 1, max_size = 3, desired_capacity = 2 to allow load balancing between instances
+    - Set min_elb_capacity = 2 to wait for this number of instances during deployment
     
     
 
