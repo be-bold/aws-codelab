@@ -9,6 +9,11 @@ If we measure high load on our service (e.g. cpu, memory, requests, ...), we wan
 0. Create an autoscaling policy
     0. using scaling type *target tracking*
     0. predefined metric *ALBRequestCountPerTarget*
+0. run a load test on your application to see it scale
+    0. run in shell `watch -n 3 "curl -s http://your-alb-dns-name/service1/health"` or refresh site in browser
+    0. Service should scale after 3 minutes of more than 10 request per minute
+    0. watch web console: EC2 -> Load Balancing -> Target Groups -> Targets
+    0. watch web console: EC2 -> Auto Scaling -> Auto Scaling Groups -> Instances and Activity History
     
 
 
