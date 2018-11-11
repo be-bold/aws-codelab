@@ -1,7 +1,7 @@
 provider "aws" {
   region = "eu-central-1"
   profile = "codelab"
-  version = "1.37"
+  version = "1.42"
 }
 
 resource "aws_ssm_parameter" "my_parameter1" {

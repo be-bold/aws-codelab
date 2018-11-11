@@ -1,6 +1,6 @@
 // uses AWS_PROFILE and AWS_REGION
 provider "aws" {
-  version = "1.37"
+  version = "1.42"
 }
 
 // Initially you must comment this section to setup terraform state bucket and locking.
