@@ -11,6 +11,7 @@ AWS CodeLab
 - Possible problems
   - if command `aws` is not working, close shell and open a new one after installation 
   - Windows: if command `aws` is not available in shell, [add aws to your PATH variable](https://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html#awscli-install-windows-path)
+  - if you have problems with the connection or certificates, avoid using your company proxy
 
 
 ## Setup AWS API Credentials
@@ -50,6 +51,7 @@ AWS CodeLab
 - Possible problems
   - if command `terraform` is not working, close shell and open a new one after installation 
   - Windows: if command `terraform` is not available in shell, add terraform.exe to your PATH variable
+  - if you have problems with the connection or certificates, avoid using your company proxy
 
 
 ## Git
