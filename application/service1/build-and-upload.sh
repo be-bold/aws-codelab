@@ -1,44 +1,50 @@
 #!/usr/bin/env bash
 
+# Run example:
+# ./build-and-upload.sh team1 v1 codelab
+
 # exit on error even if parts of a pipe fail
 set -e -o pipefail
 
 
 ###### Inputs ######
 
-SERVICE_VERSION=$1
+TEAM=$1
+SERVICE_VERSION=$2
+AWS_PROFILE=$3
 
 
 ###### Input checks ######
 
+if [[ -z "${TEAM}" ]]; then
+    echo "ERROR: 1. argument must be the team name (e.g. team1)"
+    exit 1
+fi
+
 if [[ -z "${SERVICE_VERSION}" ]]; then
-    echo "First argument must be the service version (e.g. latest)"
-    exit 1
-fi
-
-if [[ -z "${AWS_ACCOUNT_ID}" ]]; then
-    echo "ERROR: Environment variable AWS_ACCOUNT_ID must be set."
-    exit 1
-fi
-
-if [[ -z "${AWS_REGION}" ]]; then
-    echo "ERROR: Environment variable AWS_REGION must be set. (e.g. eu-central-1 for Frankfurt)"
+    echo "ERROR: 2. argument must be the service version (e.g. latest)"
     exit 1
 fi
 
 if [[ -z "${AWS_PROFILE}" ]]; then
-    echo "Environment variable AWS_PROFILE not set. Using 'default' as profile."
+    echo "3. argument aws profile not set. Using 'cocelab'."
+    AWS_PROFILE="codelab"
 fi
 
 
 ###### Main ######
 
 echo "Build docker image"
-docker build -t team1/products-service1:${SERVICE_VERSION} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
+docker build -t ${TEAM}/products-service1:${SERVICE_VERSION} --build-arg SERVICE_VERSION=${SERVICE_VERSION} .
 
 echo "Login to ECR (your Docker Registry)"
 $(aws ecr get-login --no-include-email --profile ${AWS_PROFILE})
 
+echo "Load AWS account id and region"
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text --profile ${AWS_PROFILE})
+AWS_REGION=$(aws configure get region --profile ${AWS_PROFILE})
+echo "Use AWS account id ${AWS_ACCOUNT_ID} in region ${AWS_REGION}"
+
 echo "Tag and push image"
-docker tag team1/products-service1:${SERVICE_VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/team1/products-service1:${SERVICE_VERSION}
-docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/team1/products-service1:${SERVICE_VERSION}
+docker tag ${TEAM}/products-service1:${SERVICE_VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${TEAM}/products-service1:${SERVICE_VERSION}
+docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${TEAM}/products-service1:${SERVICE_VERSION}
