@@ -10,7 +10,7 @@
         - 172.16.8.0/21
         - 172.16.16.0/21
     - with connection from/to the internet (Internet Gateway)
-0. Use tags (team, vertical, environment) with all resources where possible
+0. Use tag team = teamX with all resources where possible
 
 
 ## Helpful
