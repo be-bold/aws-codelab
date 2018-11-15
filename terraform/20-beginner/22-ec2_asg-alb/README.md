@@ -14,15 +14,14 @@ Run multiple instances and load balance application to avoid down times during f
 0. Create a target group in new file `alb-target-group.tf`
     - use http port 80 to map load balancer traffic to your instance
     - define a health check on `/service1/health` (as defined in nginx config)
-0. Create a ALB listener rule in the file `alb-target-group.tf`
-    - if request path matches `/service1/*` forward traffic to the target group
 0. Make change to *aws_autoscaling_group*
     - Connect to target group via attribute *target_group_arns*
     - Set min_size = 1, max_size = 3, desired_capacity = 2 to allow load balancing between instances
     - Set min_elb_capacity = 2 to wait for this number of instances during deployment
-    
-    
+0. Create a ALB listener rule in the file `alb-target-group.tf`
+    - if request path matches `/service1/*` forward traffic to the target group
 
+    
 ## Helpful
 - Speed up deployments: Set [deregistration_delay](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay) to 10 seconds on *aws_lb_target_group*
 
