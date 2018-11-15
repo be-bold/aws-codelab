@@ -16,7 +16,6 @@ resource "aws_instance" "web_server" {
   // use one of the subnets. Instance will run in one availability zone
   subnet_id = "${data.aws_subnet_ids.public.ids[0]}"
   vpc_security_group_ids = ["${aws_security_group.web_server.id}"]
-  // give ec2 instance a public ip (can be defined for subnets as well)
   associate_public_ip_address = true
 
   tags {
