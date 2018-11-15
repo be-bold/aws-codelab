@@ -27,7 +27,7 @@ if [[ -z "${SERVICE_VERSION}" ]]; then
 fi
 
 if [[ -z "${AWS_PROFILE}" ]]; then
-    echo "3. argument aws profile not set. Using 'cocelab'."
+    echo "3. argument aws profile not set. Using 'codelab'."
     AWS_PROFILE="codelab"
 fi
 
