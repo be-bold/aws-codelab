@@ -18,6 +18,10 @@ resource "aws_launch_template" "web_server" {
   vpc_security_group_ids = ["${aws_security_group.web_server.id}"]
   // this attribute must be base64 encoded
   user_data = "${base64encode(file("user-data.sh"))}"
+  // give ec2 instances a public ip (can be defined for subnets as well)
+  network_interfaces {
+    associate_public_ip_address = true
+  }
 
   // new in this task: ec2 instances need an iam role to get permissions (e.g. to load container from ecr)
   iam_instance_profile {
