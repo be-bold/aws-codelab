@@ -15,7 +15,7 @@ If we measure high load on our service (e.g. cpu, memory, requests, ...), we wan
     - watch web console: EC2 -> Load Balancing -> Target Groups -> Targets
     - watch web console: EC2 -> Auto Scaling -> Auto Scaling Groups -> Instances and Activity History
 0. Run terraform apply after instances are scaled to 1 or 3. What happens?
-    0. Solve the issue by adding `lifecycle { ignore_changes = ["desired_capacity"] }` to *aws_autoscaling_group*    
+    - Solve the issue by adding `lifecycle { ignore_changes = ["desired_capacity"] }` to *aws_autoscaling_group*    
     
 
 
