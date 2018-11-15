@@ -3,7 +3,6 @@ resource "aws_security_group" "alb" {
   vpc_id = "${data.aws_vpc.this.id}"
 
   ingress {
-    // new in this task: https
     from_port = 443
     to_port = 443
     protocol = "tcp"
@@ -34,7 +33,6 @@ resource "aws_lb" "this" {
 
 resource "aws_lb_listener" "this" {
   load_balancer_arn = "${aws_lb.this.arn}"
-  // new in this task: https on port 443, certificate and ssl policy
   port = 443
   protocol = "HTTPS"
   certificate_arn = "${data.aws_acm_certificate.this.arn}"

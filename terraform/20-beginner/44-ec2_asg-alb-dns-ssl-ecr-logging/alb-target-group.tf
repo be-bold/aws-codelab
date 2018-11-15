@@ -1,6 +1,5 @@
 resource "aws_lb_target_group" "web_server" {
   name = "team1-service1"
-  // NOT new in this task: the load balancer still routes to http on port 80 as our service still runs on port 80
   port = 80
   protocol = "HTTP"
   vpc_id = "${data.aws_vpc.this.id}"
