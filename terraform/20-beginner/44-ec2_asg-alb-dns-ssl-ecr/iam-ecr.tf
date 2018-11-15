@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "ecr" {
 
 // this links the policy with the permissions to the role (as inline policy)
 resource "aws_iam_role_policy" "ecr" {
-  name = "ecr-pull-and-cloudwatch-logging-policy"
+  name = "ecr-pull-policy"
   role = "${aws_iam_role.web_server.id}"
   policy = "${data.aws_iam_policy_document.ecr.json}"
 }
