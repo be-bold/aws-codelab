@@ -19,9 +19,9 @@ resource "aws_launch_template" "web_server" {
   // this attribute must be base64 encoded
   user_data = "${base64encode(file("user-data.sh"))}"
 
-  // new in this task: ec2 instances need an iam role to get permissions (e.g. to load container from ecr)
+  // new in this task: ec2 instances need an iam role via an instance profile to get permissions (e.g. to load container from ecr)
   iam_instance_profile {
-    arn = "${aws_iam_role.web_server.arn}"
+    arn = "${aws_iam_instance_profile.web_server.arn}"
   }
 
   tag_specifications {
