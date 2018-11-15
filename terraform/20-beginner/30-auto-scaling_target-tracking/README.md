@@ -5,7 +5,7 @@ If we measure high load on our service (e.g. cpu, memory, requests, ...), we wan
 
 
 ## Task
-0. Create a new folder `30-auto-scaling`
+0. Build on task *ec2_asg-alb*
 0. Create an autoscaling policy
     - using scaling type *target tracking*
     - predefined metric *ALBRequestCountPerTarget*
