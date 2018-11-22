@@ -51,7 +51,8 @@ resource "aws_ecs_service" "this" {
   }
 
   lifecycle {
-    create_before_destroy = true
+    // avoid error "Creation was not idempotent" when updating the service, false is default
+    create_before_destroy = false
     // keep current desired_count (can be changed by autoscaling) when updating resource
     ignore_changes = ["desired_count"]
   }
