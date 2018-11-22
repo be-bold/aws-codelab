@@ -1,4 +1,7 @@
 resource "aws_lb_target_group" "this" {
+  // better: use a random string as suffix to guarantee a unique name to allow create_before_destroy option
+  // https://www.terraform.io/docs/providers/random/r/string.html
+  // max length 32 characters
   name = "${local.service_name}"
   port = 80
   protocol = "HTTP"

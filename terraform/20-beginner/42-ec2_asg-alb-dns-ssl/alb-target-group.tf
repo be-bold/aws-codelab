@@ -1,4 +1,7 @@
 resource "aws_lb_target_group" "web_server" {
+  // better: use a random string as suffix to guarantee a unique name to allow create_before_destroy option
+  // https://www.terraform.io/docs/providers/random/r/string.html
+  // max length 32 characters
   name = "team1-service1"
   // NOT new in this task: the load balancer still routes to http on port 80 as our service still runs on port 80
   port = 80
