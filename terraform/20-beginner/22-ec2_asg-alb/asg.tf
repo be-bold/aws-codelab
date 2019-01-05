@@ -46,7 +46,11 @@ resource "aws_autoscaling_group" "web_server" {
     // Create new autoscaling group before destroying old one to do a blue-green deployment.
     create_before_destroy = true
     // Set desired_capacity just initially and let auto-scaling adjust it afterwards
-    ignore_changes = ["desired_capacity"]
+    // >>> BUG <<<
+    // Disabled as a terraform bug prevents creation of a new auto-scaling group when the
+    // user data of the launch template is changed.
+    // Issue: https://github.com/hashicorp/terraform/issues/17855
+    // ignore_changes = ["desired_capacity"]
   }
 
   // new in this task:

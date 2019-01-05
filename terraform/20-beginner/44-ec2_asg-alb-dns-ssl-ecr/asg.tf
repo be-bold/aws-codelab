@@ -49,7 +49,11 @@ resource "aws_autoscaling_group" "web_server" {
   // Create new autoscaling group before destroying old one to do a blue-green deployment.
   lifecycle {
     create_before_destroy = true
-    ignore_changes = ["desired_capacity"]
+    // >>> BUG <<<
+    // Disabled as a terraform bug prevents creation of a new auto-scaling group when the
+    // user data of the launch template is changed.
+    // Issue: https://github.com/hashicorp/terraform/issues/17855
+    // ignore_changes = ["desired_capacity"]
   }
 
   min_elb_capacity = 2
