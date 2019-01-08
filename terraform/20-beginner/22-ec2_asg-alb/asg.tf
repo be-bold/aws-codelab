@@ -63,8 +63,8 @@ resource "aws_autoscaling_group" "web_server" {
 
   // needed to load this ASG via data source for auto-scaling
   tag {
-    key = "Name"
-    value = "team1-web-server"
+    key = "team"
+    value = "team1"
     propagate_at_launch = false
   }
 }
