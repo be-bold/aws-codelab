@@ -52,6 +52,12 @@ To tag instances started by auto scaling group, you need this attribute on the *
 <details><summary>Show Hint 5: Public IPs for EC2 instances</summary><p>
 
 If your ec2 instances do not have a public ip, you must set attribute *map_public_ip_on_launch = true* on each public *aws_subnet*.
+Alternatively you can set it on `aws_launch_template` 
+```hcl-terraform
+  network_interfaces {
+    associate_public_ip_address = true
+  }
+``` 
 </p></details>
 
 
