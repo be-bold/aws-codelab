@@ -12,8 +12,8 @@ Service can be reached securely via own domain: https://teamX.codelab.marcelboet
 0. Adjust the load balancer listener to
     - listen on port 443 (HTTPS) instead of 80 (HTTP)
     - link the certificate your created via Amazon Certificate Manager (ACM) in the previous task
-    - use the recommended [AWS SSL policy](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html) `ELBSecurityPolicy-2016-08`
-
+    - use the recommended [AWS SSL policy](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html) `ELBSecurityPolicy-2016-08` (highest compatibility) or the newest `ELBSecurityPolicy-TLS-1-2-2017-01` (most secure)
+    - You can check the quality of the ssl certificate with [ssllabs](https://www.ssllabs.com/ssltest/index.html)
 
 
 ## Hints
