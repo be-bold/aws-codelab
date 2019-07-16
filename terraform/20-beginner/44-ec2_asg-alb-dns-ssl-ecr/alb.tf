@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
   name = "team1-alb"
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 
   ingress {
     from_port = 443
@@ -10,32 +10,31 @@ resource "aws_security_group" "alb" {
   }
 
   egress {
-    from_port = 0
     // all
+    from_port = 0
     to_port = 0
     // all
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 
 resource "aws_lb" "this" {
   name = "team1-alb"
   internal = false
   load_balancer_type = "application"
-  subnets = ["${data.aws_subnet_ids.public.ids}"]
-  security_groups = ["${aws_security_group.alb.id}"]
+  subnets = data.aws_subnet_ids.public.ids
+  security_groups = [aws_security_group.alb.id]
   tags = {
     team = "team1"
   }
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = "${aws_lb.this.arn}"
+  load_balancer_arn = aws_lb.this.arn
   port = 443
   protocol = "HTTPS"
-  certificate_arn = "${data.aws_acm_certificate.this.arn}"
+  certificate_arn = data.aws_acm_certificate.this.arn
   // https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
   ssl_policy = "ELBSecurityPolicy-2016-08"
 
@@ -50,3 +49,4 @@ resource "aws_lb_listener" "this" {
     }
   }
 }
+

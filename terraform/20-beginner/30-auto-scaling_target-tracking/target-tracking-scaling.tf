@@ -5,7 +5,7 @@
 
 resource "aws_autoscaling_policy" "this" {
   name = "team1-target-tracking-scaling"
-  autoscaling_group_name = "${data.aws_autoscaling_groups.web_server.names[0]}"
+  autoscaling_group_name = data.aws_autoscaling_groups.web_server.names[0]
 
   policy_type = "TargetTrackingScaling"
   target_tracking_configuration {
@@ -17,3 +17,4 @@ resource "aws_autoscaling_policy" "this" {
     target_value = 10 // requests per target per minute
   }
 }
+

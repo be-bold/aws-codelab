@@ -2,6 +2,7 @@
 // https://aws.amazon.com/amazon-linux-2/release-notes/
 data "aws_ami" "amazon_linux" {
   most_recent = true
+  owners = ["amazon"]
 
   filter {
     name = "name"
@@ -10,23 +11,23 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_instance" "web_server" {
-  ami = "${data.aws_ami.amazon_linux.id}"
-  instance_type = "t2.micro"
-  user_data = "${file("user-data.sh")}"
+  ami = data.aws_ami.amazon_linux.id
+  instance_type = "t3.nano"
+  user_data = file("user-data.sh")
   // use one of the subnets. Instance will run in one availability zone
-  subnet_id = "${data.aws_subnet_ids.public.ids[0]}"
-  vpc_security_group_ids = ["${aws_security_group.web_server.id}"]
+  subnet_id = tolist(data.aws_subnet_ids.public.ids)[0]
+  vpc_security_group_ids = [aws_security_group.web_server.id]
   // give ec2 instance a public ip (can be defined for subnets as well)
   associate_public_ip_address = true
 
-  tags {
+  tags = {
     Name = "team1-web-server"
   }
 }
 
 resource "aws_security_group" "web_server" {
   name = "team1-web-server"
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 
   ingress {
     from_port = 80

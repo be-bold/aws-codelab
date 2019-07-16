@@ -16,3 +16,4 @@ data "aws_lb" "this" {
 data "aws_lb_target_group" "web_server" {
   name = "team1-service1"
 }
+

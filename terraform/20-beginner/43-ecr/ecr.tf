@@ -3,7 +3,7 @@ resource "aws_ecr_repository" "service1" {
 }
 
 resource "aws_ecr_lifecycle_policy" "service1" {
-  repository = "${aws_ecr_repository.service1.name}"
+  repository = aws_ecr_repository.service1.name
   policy = <<EOF
 {
     "rules": [

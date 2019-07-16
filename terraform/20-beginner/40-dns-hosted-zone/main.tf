@@ -1,5 +1,9 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 provider "aws" {
-  region = "eu-central-1"
+  region  = "eu-central-1"
   profile = "codelab"
-  version = "1.42"
+  version = "2.19"
 }

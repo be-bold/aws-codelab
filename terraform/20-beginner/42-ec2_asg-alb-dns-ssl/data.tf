@@ -1,11 +1,11 @@
 data "aws_vpc" "this" {
-  tags {
+  tags = {
     team = "team1"
   }
 }
 
 data "aws_subnet_ids" "public" {
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 }
 
 // new in this task: we need the hosted zone for the dns record to the load balancer
@@ -17,3 +17,4 @@ data "aws_route53_zone" "this" {
 data "aws_acm_certificate" "this" {
   domain = "team1.codelab.marcelboettcher.de"
 }
+

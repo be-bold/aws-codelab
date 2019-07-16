@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "ecr" {
       "ecr:GetAuthorizationToken",
       "ecr:BatchCheckLayerAvailability",
       "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage"
+      "ecr:BatchGetImage",
     ]
     resources = ["*"]
   }
@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "ecr" {
 // this links the policy with the permissions to the role (as inline policy)
 resource "aws_iam_role_policy" "ecr" {
   name = "ecr-pull-policy"
-  role = "${aws_iam_role.web_server.id}"
-  policy = "${data.aws_iam_policy_document.ecr.json}"
+  role = aws_iam_role.web_server.id
+  policy = data.aws_iam_policy_document.ecr.json
 }
+

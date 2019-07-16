@@ -8,7 +8,7 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_internet_gateway" "this" {
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name = "team1-igw"
@@ -16,12 +16,11 @@ resource "aws_internet_gateway" "this" {
   }
 }
 
-
 ###### PUBLIC SUBNETS ######
 
 resource "aws_subnet" "public_1a" {
   cidr_block = "172.16.0.0/21"
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this.id
   # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1a"
@@ -34,7 +33,7 @@ resource "aws_subnet" "public_1a" {
 
 resource "aws_subnet" "public_1b" {
   cidr_block = "172.16.8.0/21"
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this.id
   # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1b"
@@ -47,7 +46,7 @@ resource "aws_subnet" "public_1b" {
 
 resource "aws_subnet" "public_1c" {
   cidr_block = "172.16.16.0/21"
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this.id
   # give ec2 instances a public ip
   map_public_ip_on_launch = true
   availability_zone = "eu-central-1c"
@@ -59,7 +58,7 @@ resource "aws_subnet" "public_1c" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = "${aws_vpc.this.id}"
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name = "team1-route-table-publica"
@@ -68,22 +67,23 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route" "public" {
-  route_table_id = "${aws_route_table.public.id}"
+  route_table_id = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = "${aws_internet_gateway.this.id}"
+  gateway_id = aws_internet_gateway.this.id
 }
 
 resource "aws_route_table_association" "public_1a" {
-  route_table_id = "${aws_route_table.public.id}"
-  subnet_id = "${aws_subnet.public_1a.id}"
+  route_table_id = aws_route_table.public.id
+  subnet_id = aws_subnet.public_1a.id
 }
 
 resource "aws_route_table_association" "public_1b" {
-  route_table_id = "${aws_route_table.public.id}"
-  subnet_id = "${aws_subnet.public_1b.id}"
+  route_table_id = aws_route_table.public.id
+  subnet_id = aws_subnet.public_1b.id
 }
 
 resource "aws_route_table_association" "public_1c" {
-  route_table_id = "${aws_route_table.public.id}"
-  subnet_id = "${aws_subnet.public_1c.id}"
+  route_table_id = aws_route_table.public.id
+  subnet_id = aws_subnet.public_1c.id
 }
+

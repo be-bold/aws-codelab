@@ -6,7 +6,7 @@ resource "aws_lb_target_group" "web_server" {
   // NOT new in this task: the load balancer still routes to http on port 80 as our service still runs on port 80
   port = 80
   protocol = "HTTP"
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 
   health_check {
     timeout = 3
@@ -30,12 +30,11 @@ resource "aws_lb_target_group" "web_server" {
 }
 
 resource "aws_lb_listener_rule" "web_server" {
-  listener_arn = "${aws_lb_listener.this.id}"
+  listener_arn = aws_lb_listener.this.id
 
   action {
     type = "forward"
-    target_group_arn = "${aws_lb_target_group.web_server.arn}"
-
+    target_group_arn = aws_lb_target_group.web_server.arn
   }
 
   condition {
@@ -43,3 +42,4 @@ resource "aws_lb_listener_rule" "web_server" {
     values = ["/service1/*"]
   }
 }
+

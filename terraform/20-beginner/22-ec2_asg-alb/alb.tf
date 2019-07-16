@@ -1,6 +1,6 @@
 resource "aws_security_group" "alb" {
   name = "team1-alb"
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 
   ingress {
     from_port = 80
@@ -17,22 +17,21 @@ resource "aws_security_group" "alb" {
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 
 resource "aws_lb" "this" {
   name = "team1-alb"
   internal = false
   load_balancer_type = "application"
-  subnets = ["${data.aws_subnet_ids.public.ids}"]
-  security_groups = ["${aws_security_group.alb.id}"]
+  subnets = data.aws_subnet_ids.public.ids
+  security_groups = [aws_security_group.alb.id]
   tags = {
     team = "team1"
   }
 }
 
 resource "aws_lb_listener" "this" {
-  load_balancer_arn = "${aws_lb.this.arn}"
+  load_balancer_arn = aws_lb.this.arn
   port = 80
   protocol = "HTTP"
 
@@ -47,3 +46,4 @@ resource "aws_lb_listener" "this" {
     }
   }
 }
+

@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "logging" {
     effect = "Allow"
     actions = [
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
     ]
     resources = ["*"]
   }
@@ -16,6 +16,7 @@ data "aws_iam_policy_document" "logging" {
 // this links the policy with the permissions to the role (as inline policy)
 resource "aws_iam_role_policy" "logging" {
   name = "cloudwatch-logging-policy"
-  role = "${aws_iam_role.web_server.id}"
-  policy = "${data.aws_iam_policy_document.logging.json}"
+  role = aws_iam_role.web_server.id
+  policy = data.aws_iam_policy_document.logging.json
 }
+

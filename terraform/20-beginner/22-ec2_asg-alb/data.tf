@@ -1,9 +1,10 @@
 data "aws_vpc" "this" {
-  tags {
+  tags = {
     team = "team1"
   }
 }
 
 data "aws_subnet_ids" "public" {
-  vpc_id = "${data.aws_vpc.this.id}"
+  vpc_id = data.aws_vpc.this.id
 }
+
